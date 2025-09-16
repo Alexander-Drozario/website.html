@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>My Art Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================
+   Base / Mobile-first styles
+   ========================= */
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --muted:#9aa4b2;
+  --accent:#7c5cff;
+  --accent-2:#4fd1c5;
+  --text:#e6eef6;
+  --radius:12px;
+  --container:1100px;
+  --gap:1rem;
+  --transition:200ms ease;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  color:var(--text);
+  background:linear-gradient(180deg, #071224 0%, #071a2a 100%);
+  line-height:1.5;
+  font-size:16px;
+}
+.container{max-width:var(--container);margin-inline:auto;padding-inline:1rem}
+.sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
+.skip-link{position:fixed;left:1rem;top:1rem;background:var(--accent);color:white;padding:.5rem .75rem;border-radius:8px;z-index:9999;transform:translateY(-120%);transition:transform var(--transition)}
+.skip-link:focus{transform:none}
+
+/* Header */
+.site-header{position:sticky;top:0;z-index:50;backdrop-filter:blur(6px);background:linear-gradient(180deg,rgba(7,12,24,.7),rgba(7,12,24,.35));border-bottom:1px solid rgba(255,255,255,.03)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--gap);padding-block:.75rem}
+.brand{font-weight:700;color:var(--text);text-decoration:none;font-size:1.125rem}
+.brand-accent{color:var(--accent)}
+.nav-toggle{background:transparent;border:0;padding:.5rem;cursor:pointer;display:inline-flex}
+.hamburger{width:22px;height:2px;background:var(--text);position:relative;border-radius:2px}
+.hamburger::before,.hamburger::after{content:'';position:absolute;left:0;width:100%;height:100%;background:inherit;border-radius:inherit}
+.hamburger::before{top:-7px}.hamburger::after{top:7px}
+.primary-nav{display:none}
+.nav-list{list-style:none;display:flex;gap:1rem;margin:0;padding:0}
+.nav-link{color:var(--text);text-decoration:none;padding:.5rem .6rem;border-radius:8px;font-weight:600}
+.nav-link:hover,.nav-link:focus{background:rgba(255,255,255,.03)}
+
+/* Hero */
+.hero{padding-block:3rem 2.5rem;text-align:center}
+.hero-title{font-size:1.75rem;margin:0 0 .5rem}
+.hero-sub{color:var(--muted);margin:0 0 1rem;max-width:48ch;margin-inline:auto}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem .9rem;border-radius:10px;font-weight:600;text-decoration:none;border:1px solid transparent;cursor:pointer}
+.btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#081322}
+.btn-outline{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.06)}
+
+/* Sections */
+.section-inner{padding-block:2rem}
+.section-title{font-size:1.25rem;margin:0 0 .5rem;text-align:center}
+.lead{color:var(--muted);margin:0 0 1rem;text-align:center}
+.about-grid{display:grid;gap:1rem;margin-top:1rem;text-align:center}
+.card{background:rgba(255,255,255,.02);padding:1rem;border-radius:var(--radius)}
+.card-title{margin:.25rem 0 .5rem;font-size:1rem}
+.card-body{margin:0;color:var(--muted)}
+
+.gallery-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
+.gallery-item{background:rgba(255,255,255,.02);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+.gallery-item img{width:100%;height:auto;display:block}
+.gallery-info{padding:.5rem}
+.gallery-info h4{margin:.25rem 0;font-size:1rem}
+.gallery-info p{margin:0;color:var(--muted)}
+
+.contact-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1rem}
+.contact-info{background:rgba(255,255,255,.02);padding:1rem;border-radius:10px;text-align:center}
+.contact-info a{color:var(--accent)}
+.form{background:rgba(255,255,255,.02);padding:1rem;border-radius:10px}
+.form-group{display:block;margin-bottom:.75rem}
+.label-text{display:block;font-weight:600;margin-bottom:.35rem}
+input,textarea{width:100%;padding:.65rem .75rem;border-radius:8px;border:1px solid rgba(255,255,255,.04);background:transparent;color:var(--text);font:inherit}
+.form-inline{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem}
+.form-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem}
+.form-error{color:#ffb4b4;font-size:.9rem;min-height:1.1rem}
+.form-response{margin-top:.75rem;font-weight:600}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.05);color:var(--text)}
+
+.site-footer{padding:1.25rem 0;border-top:1px solid rgba(255,255,255,.03);margin-top:2rem;text-align:center}
+.footer-links{list-style:none;display:flex;gap:.75rem;margin:0;padding:0;justify-content:center}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.95rem}
+
+/* Larger screens */
+@media(min-width:700px){
+  .primary-nav{display:block}.nav-toggle{display:none}
+  .about-grid{grid-template-columns:repeat(3,1fr)}
+  .gallery-grid{grid-template-columns:repeat(3,1fr)}
+  .contact-grid{grid-template-columns:400px 1fr}
+  .hero-title{font-size:2.25rem}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#">My<span class="brand-accent">Art</span></a>
+    <button id="nav-toggle" class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">
+      <span class="hamburger"></span>
+    </button>
+    <nav id="primary-nav" class="primary-nav">
+      <ul class="nav-list">
+        <li><a class="nav-link" href="#hero">Home</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <section id="hero" class="hero">
+    <h1 class="hero-title">Welcome to My Art Portfolio</h1>
+    <p class="hero-sub">Browse my original drawings and contact me to purchase your favorite pieces.</p>
+    <a href="#gallery" class="btn btn-primary">Browse Gallery</a>
+  </section>
+
+  <section id="about" class="about">
+    <div class="container section-inner about-grid">
+      <h2 class="section-title">About Me</h2>
+      <p class="lead">I am an artist passionate about creating unique drawings. Each piece is original and available for sale.</p>
+    </div>
+  </section>
+
+  <section id="gallery" class="gallery">
+    <div class="container section-inner">
+      <h2 class="section-title">Gallery</h2>
+      <div class="gallery-grid">
+        <!-- Example drawing items -->
+        <div class="gallery-item">
+          <img src="https://via.placeholder.com/300x300?text=Drawing+1" alt="Drawing 1">
+          <div class="gallery-info">
+            <h4>Sunset Landscape</h4>
+            <p>$50</p>
+            <a href="#contact" class="btn btn-outline">Buy / Contact</a>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://via.placeholder.com/300x300?text=Drawing+2" alt="Drawing 2">
+          <div class="gallery-info">
+            <h4>Abstract Lines</h4>
+            <p>$40</p>
+            <a href="#contact" class="btn btn-outline">Buy / Contact</a>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="https://via.placeholder.com/300x300?text=Drawing+3" alt="Drawing 3">
+          <div class="gallery-info">
+            <h4>Mountain View</h4>
+            <p>$60</p>
+            <a href="#contact" class="btn btn-outline">Buy / Contact</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container section-inner contact-grid">
+      <aside class="contact-info">
+        <h3>Contact Me</h3>
+        <p>Email: <a href="alex.drozario@hotmail.com">alex.drozario@hotmail.com</a></p>
+        <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+        <p>Fill out the form to inquire about a purchase.</p>
+      </aside>
+      <form id="contact-form" class="form" novalidate>
+        <div id="form-status" class="sr-only" aria-live="polite"></div>
+        <label class="form-group"><span class="label-text">Your name</span>
+          <input id="name" type="text" required minlength="2"/>
+          <span class="form-error" id="error-name"></span>
+        </label>
+        <label class="form-group"><span class="label-text">Email</span>
+          <input id="email" type="email" required/>
+          <span class="form-error" id="error-email"></span>
+        </label>
+        <label class="form-group"><span class="label-text">Message</span>
+          <textarea id="message" required minlength="10" rows="6" placeholder="Which drawing are you interested in?"></textarea>
+          <span class="form-error" id="error-message"></span>
+        </label>
+        <label class="form-inline"><input id="consent" type="checkbox" required/> <span>I agree to be contacted about my inquiry.</span></label>
+        <span class="form-error" id="error-consent"></span>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Send message</button>
+          <button type="reset" class="btn btn-ghost">Reset</button>
+        </div>
+        <div id="form-response" class="form-response" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <p>&copy; <span id="year"></span> My Art Portfolio</p>
+</footer>
+
+<script>
+// Simple JS for nav toggle, smooth scroll, and form validation
+const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+$('#year').textContent=new Date().getFullYear();
+
+// Mobile nav
+const navToggle=$('#nav-toggle'),primaryNav=$('#primary-nav');
+navToggle.addEventListener('click',()=>{const ex=navToggle.getAttribute('aria-expanded')==='true';navToggle.setAttribute('aria-expanded',!ex);primaryNav.style.display=ex?'':'block'});
+
+// Smooth scroll
+$$('.nav-link').forEach(link=>{
+  link.addEventListener('click',e=>{
+    const href=link.getAttribute('href');if(!href.startsWith('#'))return;e.preventDefault();
+    const target=document.querySelector(href);if(!target)return;
+    target.scrollIntoView({behavior:'smooth'});setTimeout(()=>{target.setAttribute('tabindex','-1');target.focus();setTimeout(()=>target.removeAttribute('tabindex'),400)},300);
+    if(navToggle.getAttribute('aria-expanded')==='true') navToggle.click();
+  });
+});
+
+// Form validation
+const form=$('#contact-form'),resp=$('#form-response');
+function err(el
